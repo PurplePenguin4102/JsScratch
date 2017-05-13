@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script data-require="angular.js@*" data-semver="4.0.0" 
+            src="https://code.angularjs.org/latest/angular.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <script src="ObjectDemo.js"></script>
+        <script src="ModuleDemo.js"></script>
+    </head>
+
+    <body ng-app="gitViewer">
+        <h1>PREPARE FOR ANGULAR MAGIC!!!</h1>
+
+        <!--Example data binding-->
+        {{5 * 5}}
+        <!--00000000000000000000-->
+
+        <div ng-controller="MainCtrl">
+            <p>name : {{user.name}}</p>
+            <p>login : {{user.login}}</p>
+            <p>location : {{user.location}}</p>
+            <img src="{{user.avatar_url}}" title="{{user.firstName}}"/>
+        </div>
+    </body>
+</html>
