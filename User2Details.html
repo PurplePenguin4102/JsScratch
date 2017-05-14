@@ -1,0 +1,38 @@
+<!-- as a result of search or submission of form, MainCtrl will populate the $scope.user object -->
+<div>
+    <div>
+        <h2>{{user2.name}}</h2>
+        <p>login : {{user2.login}}</p>
+        <p>location : {{user2.location}}</p>
+        <!-- we can even embed into html properties for funs -->
+        <img src="{{user2.avatar_url}}" title="{{user2.firstName}}"/>
+        <p>
+            Order:
+            <select ng-model="repo2SortOrder">
+                <option value="+name">Name</option>
+                <option value="-stargazers_count">Stars</option>
+                <option value="+language">Language</option>
+            </select>
+        </p>
+    </div>
+
+    <!-- after MainCtrl runs the $http.get for user info, we run another $http.get for repo information -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Stars</th>
+                <th>Language</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- This is how we do a for-each loop on $scope.repos the filter is linked to $scope.repoSortOrder -->
+            <tr ng-repeat="repo in repos2 | orderBy:repo2SortOrder"> 
+                <td>{{repo.name}}</td>
+                <!-- example of a filter "|" this time for numbers -->
+                <td>{{repo.stargazers_count | number}}</td> 
+                <td>{{repo.language}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

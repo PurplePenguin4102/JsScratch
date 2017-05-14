@@ -7,18 +7,49 @@
         <script src="ModuleDemo.js"></script>
     </head>
 
-    <body ng-app="gitViewer">
-        <h1>PREPARE FOR ANGULAR MAGIC!!!</h1>
+    <!-- looks for an app module called "gitViewer" i.e. anular.module("gitViewer", [])-->
+    <body ng-app="gitViewer"> 
+        <!-- looks for a function called MainCtrl in the module's controller list -->
+        <div ng-controller="MainCtrl"> 
+            <!--Example data binding, getting angular to do something-->
+            {{5 * 5}}
+            <!--00000000000000000000-->
 
-        <!--Example data binding-->
-        {{5 * 5}}
-        <!--00000000000000000000-->
+            <!-- bound to $scope.message defined by the controller-->
+            <h1>{{message}}</h1> 
 
-        <div ng-controller="MainCtrl">
-            <p>name : {{user.name}}</p>
-            <p>login : {{user.login}}</p>
-            <p>location : {{user.location}}</p>
-            <img src="{{user.avatar_url}}" title="{{user.firstName}}"/>
+            <div>
+                <!-- bound to $scope.message -->
+                {{error}}
+            </div>
+
+            <div class="wrapper">
+                <div class="left">
+                    <!-- two potential directives are valid here for V->M interaction, ng-click on the button and ng-submit on the form -->
+                    <form name="searchUser1">
+                        <!-- bound to and defines $scope.username-->
+                        <input type="search" placeholder="Username to find" ng-model="username1"/> 
+                        <!-- looks for a search function in the controller that takes one parameter and runs it with $scope.username1 -->
+                        <input type="submit" value="Search" ng-click="search1(username1)"> 
+                    </form>
+
+                    <!--string replaces this div for the div found in UserDetails.html-->
+                    <div ng-include="'User1Details.html'" ng-show="user1"> </div>
+                </div>
+
+                <div class="right">
+                    <!-- two potential directives are valid here for V->M interaction, ng-click on the button and ng-submit on the form -->
+                    <form name="searchUser2">
+                        <!-- bound to and defines $scope.username-->
+                        <input type="search" placeholder="Username to find" ng-model="username2"/> 
+                        <!-- looks for a search function in the controller that takes one parameter and runs it with $scope.username -->
+                        <input type="submit" value="Search" ng-click="search2(username2)"> 
+                    </form>
+
+                    <!--string replaces this div for the div found in UserDetails.html-->
+                    <div ng-include="'User2Details.html'" ng-show="user2"> </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
