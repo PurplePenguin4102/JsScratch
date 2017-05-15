@@ -6,7 +6,7 @@
     // the empty array is needed to instanciate a blank module
     var app = angular.module("gitViewer", []);
     
-    var MainCtrl = function($scope, $http) {
+    var MainCtrl = function($scope, github) {
         // $scope and $http are objects defined by angular. $scope tells us what's available for bindings
         // and http lets us make AJAX requests to remote resources
 
@@ -14,24 +14,22 @@
         $scope.message = "Prepare for Angular Magic!!!"
 
         // -- define behaviours
-        var onResponse1 = function(resp) {
-            $scope.user1 = resp.data;
-            $http.get($scope.user1.repos_url)
-                 .then(onRepos1, onError);
+        var onResponse1 = function(data) {
+            $scope.user1 = data;
+            github.getRepos($scope.user1).then(onRepos1, onError);
         };
 
-        var onResponse2 = function(resp) {
-            $scope.user2 = resp.data;
-            $http.get($scope.user2.repos_url)
-                 .then(onRepos2, onError);
+        var onResponse2 = function(data) {
+            $scope.user2 = data;
+            github.getRepos($scope.user2).then(onRepos2, onError);
         };
 
-        var onRepos1 = function(resp) {
-            $scope.repos1 = resp.data;
+        var onRepos1 = function(data) {
+            $scope.repos1 = data;
         }
 
-        var onRepos2 = function(resp) {
-            $scope.repos2 = resp.data;
+        var onRepos2 = function(data) {
+            $scope.repos2 = data;
         }
 
         var onError = function(err) {
@@ -40,14 +38,13 @@
 
         $scope.search1 = function(username) {
             // -- invoke our webservice, similar to HttpClient use .then callback instead of await/async pattern
-            $http.get("https://api.github.com/users/" + username)
-                 .then(onResponse1, onError);
+            github.getUser(username).then(onResponse1, onError);
         }
 
         $scope.search2 = function(username) {
             // -- invoke our webservice, similar to HttpClient use .then callback instead of await/async pattern
-            $http.get("https://api.github.com/users/" + username)
-                 .then(onResponse2, onError);
+            github.getUser(username).then(onResponse2, onError);
+
         }
 
         $scope.repo1SortOrder = "-stargazers_count"
