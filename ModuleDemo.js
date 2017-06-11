@@ -1,7 +1,7 @@
 (function(){
     
     // angular is angular's god object
-
+ 
     // the module method lets us define modules (clusters of related functions)
     // the empty array is needed to instanciate a blank module
     var app = angular.module("gitViewer", []);
